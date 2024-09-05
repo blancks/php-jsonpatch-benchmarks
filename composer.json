@@ -1,0 +1,21 @@
+{
+    "autoload": {
+        "files": ["src/config.php"]
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/mikemccabe/json-patch-php"
+        }
+    ],
+    "require": {
+        "blancks/fast-jsonpatch-php": "^1.1",
+        "mikemccabe/json-patch-php": "dev-master",
+        "php-jsonpatch/php-jsonpatch": "^4.1",
+        "xp-forge/json-patch": "^2.1",
+        "gamringer/php-json-patch": "^1.0",
+        "phpunit/phpunit": "^10",
+        "swaggest/json-diff": "^3.11",
+        "remorhaz/php-json-patch": "^0.6.1"
+    }
+}

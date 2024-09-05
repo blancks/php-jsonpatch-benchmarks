@@ -11,9 +11,9 @@ The following PHP JSON Patch libraries are included in the benchmark:
 
 1. [**blancks/fast-jsonpatch-php**](https://github.com/blancks/fast-jsonpatch-php) (v1.1.3)
 2. [**mikemccabe/json-patch-php**](https://github.com/mikemccabe/json-patch-php) (dev-master)
-3. [**php-jsonpatch/php-jsonpatch**](https://github.com/php-jsonpatch/php-jsonpatch) (v4.1.0)
+3. [**php-jsonpatch/php-jsonpatch**](https://github.com/raphaelstolt/php-jsonpatch) (v4.1.0)
 4. [**xp-forge/json-patch**](https://github.com/xp-forge/json-patch) (v2.1.0)
-5. [**gamringer/php-json-patch**](https://github.com/gamringer/php-json-patch) (v1.0)
+5. [**gamringer/php-json-patch**](https://github.com/gamringer/JSONPatch) (v1.0)
 6. [**swaggest/json-diff**](https://github.com/swaggest/json-diff) (v.3.11)
 7. [**remorhaz/php-json-patch**](https://github.com/remorhaz/php-json-patch) (v.0.6.1)
 

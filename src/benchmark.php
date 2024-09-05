@@ -120,9 +120,9 @@ if ($isChildProcess) {
  ************************************************************/
 
 $UnitTest = runAutomatedTests($cmdLibraryInput);
+echo 'Unit Test Results: ', $UnitTest['output'], PHP_EOL;
 
 if (!$UnitTest['status']) {
-    echo 'Unit Test Results: ', $UnitTest['output'], PHP_EOL;
     echo $cmdLibraryInput, ' did not passed automated tests', PHP_EOL;
     echo 'Benchmark will still run if the class does not fail', PHP_EOL;
 }

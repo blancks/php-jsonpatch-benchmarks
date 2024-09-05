@@ -21,9 +21,14 @@ const ITERATIONS_PER_PATCH = 1000;
 const PATCH_NESTED_LEVEL = 1;
 
 /**
- * Output filename where test data will be written to
+ * Output folder where the OUTPUT_FILENAME will be written to
  */
-const OUTPUT_FILENAME = 'benchmark.csv';
+const OUTPUT_FOLDER = 'results';
+
+/**
+ * CLI instruction to run benchmark processes
+ */
+const BENCHMARK_CMD = 'jpbench';
 
 /**
  * CLI instruction to run automated tests

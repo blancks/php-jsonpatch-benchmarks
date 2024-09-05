@@ -1,28 +1,22 @@
 <?php declare(strict_types=1);
 
+namespace blancks\JsonPatchBenchmark\lib;
 use Remorhaz\JSON\Data\Value\EncodedJson;
 use Remorhaz\JSON\Patch\Processor\Processor;
 use Remorhaz\JSON\Patch\Query\QueryFactory;
 
-function applyJsonPatch(
-    string &$documentString,
-    string $patchString,
-    array|\stdClass &$documentReference,
-    array $patch
-): float {
-
-    $encodedValueFactory = EncodedJson\NodeValueFactory::create();
-    $queryFactory = QueryFactory::create();
-    $processor = Processor::create();
+function applyJsonPatch(string &$json, string $patch): float
+{
+    $EncodedValueFactory = EncodedJson\NodeValueFactory::create();
+    $QueryFactory = QueryFactory::create();
+    $Processor = Processor::create();
 
     $microtime = microtime(true);
 
-    $patch = $encodedValueFactory->createValue($patchString);
-    $query = $queryFactory->createQuery($patch);
-    $document = $encodedValueFactory->createValue($documentString);
-    $result = $processor->apply($query, $document);
-    $documentString = $result->encode();
+    $Patch = $EncodedValueFactory->createValue($patch);
+    $Document = $EncodedValueFactory->createValue($json);
+    $Result = $Processor->apply($QueryFactory->createQuery($Patch), $Document);
+    $json = $Result->encode();
 
     return microtime(true) - $microtime;
-
 }

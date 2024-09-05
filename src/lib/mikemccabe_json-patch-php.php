@@ -1,19 +1,17 @@
 <?php declare(strict_types=1);
 
-function applyJsonPatch(
-    string &$documentString,
-    string $patchString,
-    array|\stdClass &$documentReference,
-    array $patch
-): float {
+namespace blancks\JsonPatchBenchmark\lib;
+
+function applyJsonPatch(string &$json, string $patch): float
+{
     // this class only supports document and patch operations as associative arrays
-    $documentReference = json_decode($documentString, true);
-    $patch = json_decode($patchString, true);
+    $jsonDecoded = json_decode($json, true);
+    $patchDecoded = json_decode($patch, true);
 
     $microtime = microtime(true);
-    $documentReference = \mikemccabe\JsonPatch\JsonPatch::patch($documentReference, $patch, true);
-    $benchmarkTime = microtime(true) - $microtime;
+    $jsonDecoded = \mikemccabe\JsonPatch\JsonPatch::patch($jsonDecoded, $patchDecoded, true);
+    $output = microtime(true) - $microtime;
 
-    $documentString = json_encode($documentReference);
-    return $benchmarkTime;
+    $json = json_encode($jsonDecoded);
+    return $output;
 }

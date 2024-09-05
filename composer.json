@@ -1,7 +1,11 @@
 {
     "autoload": {
-        "files": ["src/config.php"],
+        "files": [
+            "src/config.php",
+            "src/utilities.php"
+        ],
         "psr-4": {
+            "blancks\\JsonPatchBenchmark\\": "src",
             "blancks\\JsonPatchBenchmarkTests\\": "tests"
         }
     },

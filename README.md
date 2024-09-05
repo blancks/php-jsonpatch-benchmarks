@@ -71,7 +71,7 @@ composer install
 
 Then, you can execute the benchmark script:
 ```bash
-php ./src/benchmark.php [library]
+php jpbench [library]
 ```
 
 **[library]** may be one of the following:
@@ -85,7 +85,7 @@ php ./src/benchmark.php [library]
 
 for example:
 ```bash
-php ./src/benchmark.php blancks_fast-jsonpatch
+php jpbench blancks_fast-jsonpatch
 ```
 
 

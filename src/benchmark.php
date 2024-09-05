@@ -154,7 +154,7 @@ for ($patchsize = 1; $patchsize <= MAX_PATCHSIZE; ++$patchsize) {
             $iterationsPerThread = ceil(min((ITERATIONS_PER_PATCH - $iterationCount) / $available_threads, 500));
         }
 
-        $iterationEnd = min($iterationCount + $iterationsPerThread, ITERATIONS_PER_PATCH);
+        $iterationEnd = (int)min($iterationCount + $iterationsPerThread, ITERATIONS_PER_PATCH);
 
         // keeps spawning child processes until we ran out of threads
         $fibers[] = spawnProcessFiber($cmdLibraryInput, $patchsize, $iterationCount, $iterationEnd);

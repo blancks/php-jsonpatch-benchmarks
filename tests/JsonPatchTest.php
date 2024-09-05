@@ -15,8 +15,8 @@ final class JsonPatchTest extends TestCase
     public function testBlancks_fast_jsonpatch(string $json, string $patch, string $expected): void
     {
         $this->assertSame(
-            json_encode(json_decode($expected, false, 512, JSON_THROW_ON_ERROR)),   // normalizes expected json
-            FastJsonPatch::apply($json, $patch)                                     // normalizes actual json
+            json_encode(json_decode($expected, false, 512, JSON_THROW_ON_ERROR)),
+            FastJsonPatch::apply($json, $patch)
         );
     }
 

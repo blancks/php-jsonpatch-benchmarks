@@ -1,134 +1,34 @@
 <?php declare(strict_types=1);
 
-use blancks\JsonPatch\exceptions\InvalidPatchPathException;
-use blancks\JsonPatch\FastJsonPatch;
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\UsesClass;
+namespace blancks\JsonPatchBenchmarkTests;
+
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(FastJsonPatch::class)]
-#[UsesClass(InvalidPatchPathException::class)]
-final class JsonPatchTest extends TestCase
+abstract class JsonPatchComplianceTest extends TestCase
 {
-    #[DataProvider('validOperationsProvider')]
-    public function testBlancks_fast_jsonpatch(string $json, string $patch, string $expected): void
-    {
-        $this->assertSame(
-            json_encode(json_decode($expected, false, 512, JSON_THROW_ON_ERROR)),
-            FastJsonPatch::apply($json, $patch)
-        );
-    }
-
-    #[DataProvider('validOperationsProvider')]
-    public function testGamringer_php_json_patch(string $json, string $patch, string $expected): void
-    {
-        $document = json_decode($json);
-        $Patch = \gamringer\JSONPatch\Patch::fromJSON($patch);
-        $Patch->apply($document);
-
-        $this->assertSame(
-            $this->normalizeJson($expected),
-            $this->normalizeJson(json_encode($document))
-        );
-    }
-
-    #[DataProvider('validOperationsProvider')]
-    public function testMikemccabe_json_patch_php(string $json, string $patch, string $expected): void
-    {
-        $json = json_decode($json, true);
-        $patch = json_decode($patch, true);
-        $document = \mikemccabe\JsonPatch\JsonPatch::patch($json, $patch);
-
-        $this->assertSame(
-            $this->normalizeJson($expected),
-            $this->normalizeJson(json_encode($document))
-        );
-    }
-
-    #[DataProvider('validOperationsProvider')]
-    public function testPhp_jsonpatch_php_jsonpatch(string $json, string $patch, string $expected): void
-    {
-        $Patch = new Rs\Json\Patch($json, $patch);
-        $document = json_decode($Patch->apply(), false, 512, JSON_THROW_ON_ERROR);
-
-        $this->assertSame(
-            $this->normalizeJson($expected),
-            $this->normalizeJson(json_encode($document))
-        );
-    }
-
-    #[DataProvider('validOperationsProvider')]
-    public function testRemorhaz_php_json_patch(string $json, string $patch, string $expected): void
-    {
-        $encodedValueFactory = Remorhaz\JSON\Data\Value\EncodedJson\NodeValueFactory::create();
-        $queryFactory = Remorhaz\JSON\Patch\Query\QueryFactory::create();
-        $processor = Remorhaz\JSON\Patch\Processor\Processor::create();
-
-        $patch = $encodedValueFactory->createValue($patch);
-        $query = $queryFactory->createQuery($patch);
-        $document = $encodedValueFactory->createValue($json);
-        $result = $processor->apply($query, $document);
-        $documentString = $result->encode();
-
-        $this->assertSame(
-            $this->normalizeJson($expected),
-            $this->normalizeJson($documentString)
-        );
-    }
-
-    #[DataProvider('validOperationsProvider')]
-    public function testSwaggest_json_diff(string $json, string $patch, string $expected): void
-    {
-        $document = json_decode($json);
-        $patch = json_decode($patch);
-        $patch = \Swaggest\JsonDiff\JsonPatch::import($patch);
-        $patch->apply($document);
-
-        $this->assertSame(
-            $this->normalizeJson($expected),
-            $this->normalizeJson(json_encode($document))
-        );
-    }
-
-    #[DataProvider('validOperationsProvider')]
-    public function testXp_forge_json_patch(string $json, string $patch, string $expected): void
-    {
-        $document = json_decode($json, true);
-        $patch = json_decode($patch, true);
-
-        $Changes = new \text\json\patch\Changes(...$patch);
-        $document = $Changes->apply($document)->value();
-
-        $this->assertSame(
-            $this->normalizeJson($expected),
-            $this->normalizeJson(json_encode($document))
-        );
-    }
-
     public static function validOperationsProvider(): array
     {
         return [
             /*
-             Some classes handles empty patch by throwing an exception.
-             I'll avoid these test cases to be as much as fair as possible
-
-            'Empty patch against empty document' => [
-                '{}',
-                '[]',
-                '{}'
-            ],
-            'Empty patch against non-empty document' => [
-                '{"foo": 1}',
-                '[]',
-                '{"foo": 1}'
-            ],
-            'Empty patch against top-level array document' => [
-                '["foo"]',
-                '[]',
-                '["foo"]'
-            ],
-            */
+             * Some classes handles empty patch by throwing an exception.
+             * I'll avoid these test cases to be as fair as possible
+             *
+             * 'Empty patch against empty document' => [
+             *     '{}',
+             *     '[]',
+             *     '{}'
+             * ],
+             * 'Empty patch against non-empty document' => [
+             *     '{"foo": 1}',
+             *     '[]',
+             *     '{"foo": 1}'
+             * ],
+             * 'Empty patch against top-level array document' => [
+             *     '["foo"]',
+             *     '[]',
+             *     '["foo"]'
+             * ],
+             */
             'Add patch replaces existing value' => [
                 '{"foo": 1}',
                 '[{"op": "add", "path": "/foo", "value": "Hello World"}]',
@@ -477,21 +377,21 @@ final class JsonPatchTest extends TestCase
         ];
     }
 
-    private function normalizeJson(string $json): string
+    protected function normalizeJson(string $json): string
     {
         $document = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
         $this->recursiveKeySort($document);
         return json_encode($document);
     }
 
-    private function recursiveKeySort(array|\stdClass &$a): void
+    protected function recursiveKeySort(array|\stdClass &$a): void
     {
         foreach ($a as &$item) {
             if (is_array($item) || is_object($item)) {
                 if ($item instanceof \stdClass) {
-                    $item = (array)$item;
+                    $item = (array) $item;
                     $this->recursiveKeySort($item);
-                    $item = (object)$item;
+                    $item = (object) $item;
                     continue;
                 }
 
@@ -500,9 +400,9 @@ final class JsonPatchTest extends TestCase
         }
 
         if ($a instanceof \stdClass) {
-            $a = (array)$a;
+            $a = (array) $a;
             ksort($a, SORT_STRING);
-            $a = (object)$a;
+            $a = (object) $a;
             return;
         }
 

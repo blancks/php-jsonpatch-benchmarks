@@ -29,6 +29,6 @@ const OUTPUT_FILENAME = 'benchmark.csv';
  * CLI instruction to run automated tests
  * the %s value will be replaced with the library name
  */
-const PHPUNIT_TEST_CMD = 'php ./vendor/phpunit/phpunit/phpunit --no-configuration --filter "/(JsonPatchTest::test%s)( .*)?$/" --test-suffix JsonPatchTest.php .\tests';
+const PHPUNIT_TEST_CMD = 'php ./vendor/phpunit/phpunit/phpunit --no-configuration --test-suffix %sTest.php .\tests';
 
 // eof

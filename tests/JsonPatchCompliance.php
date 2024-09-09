@@ -4,31 +4,93 @@ namespace blancks\JsonPatchBenchmarkTests;
 
 use PHPUnit\Framework\TestCase;
 
-abstract class JsonPatchComplianceTest extends TestCase
+abstract class JsonPatchCompliance extends TestCase
 {
+    public static function atomicOperationsProvider(): array
+    {
+        return [
+            'Atomic Operations, object: ADD' => [
+                '{"foo":"Hello"}',
+                '[{"op": "add", "path": "/bar", "value": "World"}, {"op": "test", "path": "/a", "value": ""}]',
+                '{"foo":"Hello"}',
+            ],
+            'Atomic Operations, object: REPLACE' => [
+                '{"foo":"Hello"}',
+                '[{"op": "replace", "path": "/foo", "value": "Hello World"}, {"op": "test", "path": "/a", "value": ""}]',
+                '{"foo":"Hello"}',
+            ],
+            'Atomic Operations, object: COPY' => [
+                '{"foo":"Hello"}',
+                '[{"op": "copy", "from": "/foo", "path": "/bar"}, {"op": "test", "path": "/a", "value": ""}]',
+                '{"foo":"Hello"}',
+            ],
+            'Atomic Operations, object: MOVE' => [
+                '{"foo":"Hello"}',
+                '[{"op": "move", "from": "/foo", "path": "/bar"}, {"op": "test", "path": "/a", "value": ""}]',
+                '{"foo":"Hello"}',
+            ],
+            'Atomic Operations, object: REMOVE' => [
+                '{"foo":"Hello"}',
+                '[{"op": "remove", "path": "/foo"}, {"op": "test", "path": "/a", "value": ""}]',
+                '{"foo":"Hello"}',
+            ],
+            'Atomic Operations, array: ADD' => [
+                '[]',
+                '[{"op": "add", "path": "/-", "value": "World"}, {"op": "test", "path": "/a", "value": ""}]',
+                '[]',
+            ],
+            'Atomic Operations, array: REPLACE' => [
+                '["Hello"]',
+                '[{"op": "replace", "path": "/0", "value": "Hello World"}, {"op": "test", "path": "/a", "value": ""}]',
+                '["Hello"]',
+            ],
+            'Atomic Operations, array: COPY' => [
+                '["Hello"]',
+                '[{"op": "copy", "from": "/0", "path": "/1"}, {"op": "test", "path": "/a", "value": ""}]',
+                '["Hello"]',
+            ],
+            'Atomic Operations, array: MOVE' => [
+                '[["Hello"],[]]',
+                '[{"op": "move", "from": "/0/0", "path": "/1/0"}, {"op": "test", "path": "/a", "value": ""}]',
+                '[["Hello"],[]]',
+            ],
+            'Atomic Operations, array: REMOVE' => [
+                '["Hello"]',
+                '[{"op": "remove", "path": "/0"}, {"op": "test", "path": "/a", "value": ""}]',
+                '["Hello"]',
+            ],
+            'Atomic operations, mixed' => [
+                '{"foo":[{"bar":"start"}]}',
+                '[{"op": "add", "path": "/foo/-", "value": "Hello"},
+                {"op": "add", "path": "/foo/0/foobar", "value": "Hello"},
+                {"op": "add", "path": "/foo/0/bar", "value": "World"},
+                {"op": "remove", "path": "/foo/0/foobar"},
+                {"op": "copy", "from": "/foo/0", "path": "/foo/-"},
+                {"op": "replace", "path": "/foo", "value": "Hello World"},
+                {"op": "test", "path": "/bar", "value": "Hello World"}]',
+                '{"foo":[{"bar":"start"}]}'
+            ],
+        ];
+    }
+
     public static function validOperationsProvider(): array
     {
         return [
-            /*
-             * Some classes handles empty patch by throwing an exception.
-             * I'll avoid these test cases to be as fair as possible
-             *
-             * 'Empty patch against empty document' => [
-             *     '{}',
-             *     '[]',
-             *     '{}'
-             * ],
-             * 'Empty patch against non-empty document' => [
-             *     '{"foo": 1}',
-             *     '[]',
-             *     '{"foo": 1}'
-             * ],
-             * 'Empty patch against top-level array document' => [
-             *     '["foo"]',
-             *     '[]',
-             *     '["foo"]'
-             * ],
-             */
+            'Empty patch against empty document' => [
+                '{}',
+                '[]',
+                '{}'
+            ],
+            'Empty patch against non-empty document' => [
+                '{"foo": 1}',
+                '[]',
+                '{"foo": 1}'
+            ],
+            'Empty patch against top-level array document' => [
+                '["foo"]',
+                '[]',
+                '["foo"]'
+            ],
             'Add patch replaces existing value' => [
                 '{"foo": 1}',
                 '[{"op": "add", "path": "/foo", "value": "Hello World"}]',

@@ -104,7 +104,7 @@ if ($isChildProcess) {
 
         $patchString = json_encode($operations);
         $benchmarkSeconds = \blancks\JsonPatchBenchmark\lib\applyJsonPatch($documentString, $patchString);
-        $benchmarkMicrotime = intval($benchmarkSeconds * 10e6);
+        $benchmarkMicrotime = intval($benchmarkSeconds * 1e6);
         $memoryKiB = memory_get_usage(true) / 1024;
         $resultsBuffer .= implode(',', [$patchsize, $benchmarkMicrotime, $memoryKiB]) . PHP_EOL;
     }

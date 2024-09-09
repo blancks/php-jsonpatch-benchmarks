@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "blancks/fast-jsonpatch-php": "^1.1",
+        "blancks/fast-jsonpatch-php": "^1.2",
         "mikemccabe/json-patch-php": "dev-master",
         "php-jsonpatch/php-jsonpatch": "^4.1",
         "xp-forge/json-patch": "^2.1",

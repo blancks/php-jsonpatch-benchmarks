@@ -160,46 +160,32 @@ function extimatedTimeLeft(float $startmicrotime, float $taskCurrentIteration, f
 /**
  * Transforms the number of $seconds into minutes, hours and days if needed providing a better human-readable string
  * @param float $seconds
- * @param bool $zeropad
  * @return string
  */
-function secondsToHumanTime(float $seconds, bool $zeropad = false): string
+function secondsToHumanTime(float $seconds): string
 {
-    $padder = fn(float $item, int $length) => str_pad((string) $item, $length, $zeropad ? '0' : ' ', STR_PAD_LEFT);
-
-    if ($seconds < 1) {
-        return $padder(floor($seconds * 1000), 3) . 'ms';
-    }
-
-    if ($seconds < 60) {
-        return $padder(floor($seconds), 2) . 's';
-    }
-
-    if ($seconds < 3600) {
-        $minutesLeft = floor($seconds / 60);
-        $secondsLeft = floor($seconds - ($minutesLeft * 60));
-
-        return $padder($minutesLeft, 2) . 'min'
-            . ', ' . $padder($secondsLeft, 2) . 's';
-    }
-
-    if ($seconds < 86400) {
-        $hoursLeft = floor($seconds / 3600);
-        $minutesLeft = floor(($seconds - ($hoursLeft * 3600)) / 60);
-        $secondsLeft = floor($seconds - ($hoursLeft * 3600) - ($minutesLeft * 60));
-
-        return $padder($hoursLeft, 2) . 'h'
-            . ', ' . $padder($minutesLeft, 2) . 'min'
-            . ', ' . $padder($secondsLeft, 2) . 's';
-    }
+    static $padder = null;
+    $padder ??= fn(float $item, int $length) => str_pad((string) $item, $length, ' ', STR_PAD_LEFT);
 
     $daysLeft = floor($seconds / 86400);
     $hoursLeft = floor(($seconds - ($daysLeft * 86400)) / 3600);
     $minutesLeft = floor(($seconds - ($daysLeft * 86400) - ($hoursLeft * 3600)) / 60);
     $secondsLeft = floor($seconds - ($daysLeft * 86400) - ($hoursLeft * 3600) - ($minutesLeft * 60));
 
-    return $padder($daysLeft, 3) . 'd'
-        . ', ' . $padder($hoursLeft, 2) . 'h'
-        . ', ' . $padder($minutesLeft, 2) . 'min'
-        . ', ' . $padder($secondsLeft, 2) . 's';
+    $output = '';
+
+    if ($daysLeft) {
+        $output .= $padder($daysLeft, 2) . 'd, ';
+    }
+
+    if ($hoursLeft) {
+        $output .= $padder($hoursLeft, 2) . 'h, ';
+    }
+
+    if ($minutesLeft) {
+        $output .= $padder($minutesLeft, 2) . 'm, ';
+    }
+
+    $output .= $padder($secondsLeft, 2) . 's';
+    return $output;
 }

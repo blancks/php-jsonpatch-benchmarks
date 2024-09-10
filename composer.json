@@ -26,12 +26,12 @@
         "remorhaz/php-json-patch": "^0.6.1"
     },
     "scripts": {
-        "blancks/fast-jsonpatch-php": "phpunit --no-configuration --test-suffix Blancks_fast_jsonpatchTest.php .\\tests",
-        "remorhaz/php-json-patch": "phpunit --no-configuration --test-suffix Remorhaz_php_json_patchTest.php .\\tests",
-        "mikemccabe/json-patch-php": "phpunit --no-configuration --test-suffix Mikemccabe_json_patch_phpTest.php .\\tests",
-        "php-jsonpatch/php-jsonpatch": "phpunit --no-configuration --test-suffix Php_jsonpatch_php_jsonpatchTest.php .\\tests",
-        "xp-forge/json-patch": "phpunit --no-configuration --test-suffix Xp_forge_json_patchTest.php .\\tests",
-        "gamringer/php-json-patch": "phpunit --no-configuration --test-suffix Gamringer_php_json_patchTest.php .\\tests",
-        "swaggest/json-diff": "phpunit --no-configuration --test-suffix Swaggest_json_diffTest.php .\\tests"
+        "blancks/fast-jsonpatch-php": "phpunit --no-configuration --test-suffix Blancks_fast_jsonpatchTest.php ./tests",
+        "remorhaz/php-json-patch": "phpunit --no-configuration --test-suffix Remorhaz_php_json_patchTest.php ./tests",
+        "mikemccabe/json-patch-php": "phpunit --no-configuration --test-suffix Mikemccabe_json_patch_phpTest.php ./tests",
+        "php-jsonpatch/php-jsonpatch": "phpunit --no-configuration --test-suffix Php_jsonpatch_php_jsonpatchTest.php ./tests",
+        "xp-forge/json-patch": "phpunit --no-configuration --test-suffix Xp_forge_json_patchTest.php ./tests",
+        "gamringer/php-json-patch": "phpunit --no-configuration --test-suffix Gamringer_php_json_patchTest.php ./tests",
+        "swaggest/json-diff": "phpunit --no-configuration --test-suffix Swaggest_json_diffTest.php ./tests"
     }
 }

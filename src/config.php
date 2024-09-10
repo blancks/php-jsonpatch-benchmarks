@@ -34,6 +34,6 @@ const BENCHMARK_CMD = 'jpbench';
  * CLI instruction to run automated tests
  * the %s value will be replaced with the library name
  */
-const PHPUNIT_TEST_CMD = 'php ./vendor/phpunit/phpunit/phpunit --no-configuration --test-suffix %sTest.php .\tests';
+const PHPUNIT_TEST_CMD = 'php ./vendor/phpunit/phpunit/phpunit --no-configuration --test-suffix %sTest.php ./tests';
 
 // eof

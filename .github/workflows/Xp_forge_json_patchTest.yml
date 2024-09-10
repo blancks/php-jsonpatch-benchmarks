@@ -1,0 +1,27 @@
+name: xp-forge/json-patch
+
+on: push
+
+jobs:
+  test:
+    name: "PHPUnit (PHP ${{ matrix.php-versions }})"
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-versions: ["8.2"]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-versions }}"
+
+      - name: Install Composer
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Run Tests
+        run: composer run-script xp-forge/json-patch

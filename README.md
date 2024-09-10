@@ -61,15 +61,15 @@ The compliance test strictly checks if the output json of each library is consis
 The following table shows the average time each library took to apply a patch with 1000 operations to a target document as summary of the performance. 
 The actual benchmark data is available [here](https://docs.google.com/spreadsheets/d/1ZTDWh1k-zzhYHqZB3JMD2WRV0bPRIWUMRbLiMJhMLHk/edit?usp=sharing).
 
-| Library                     | Microseconds                       |
-|-----------------------------|------------------------------------|
-| blancks/fast-jsonpatch-php  | 2903                               |
-| mikemccabe/json-patch-php   | 3355                               |
-| swaggest/json-diff          | 3638                               |
-| gamringer/php-json-patch    | 7276                               |
-| xp-forge/json-patch         | 8534                               |
-| php-jsonpatch/php-jsonpatch | 10970                              |
-| remorhaz/php-json-patch     | N/A (needs many hours to complete) |
+| Library                     | Microseconds |
+|-----------------------------|--------------|
+| blancks/fast-jsonpatch-php  | 2903         |
+| mikemccabe/json-patch-php   | 3355         |
+| swaggest/json-diff          | 3638         |
+| gamringer/php-json-patch    | 7276         |
+| xp-forge/json-patch         | 8534         |
+| php-jsonpatch/php-jsonpatch | 10970        |
+| remorhaz/php-json-patch     | 870711       |
 
 > Unfortunately remorhaz skyrocket out of the chart just with 20 operations patch. It is in the range of O(2^n) if not worse.
 

@@ -9,13 +9,13 @@ This project aims to compare their performance and functionality.
 
 The following PHP JSON Patch libraries are included in the benchmark:
 
-1. [**blancks/fast-jsonpatch-php**](https://github.com/blancks/fast-jsonpatch-php) (v1.2.3)
-2. [**mikemccabe/json-patch-php**](https://github.com/mikemccabe/json-patch-php) (dev-master)
-3. [**php-jsonpatch/php-jsonpatch**](https://github.com/raphaelstolt/php-jsonpatch) (v4.1.0)
-4. [**xp-forge/json-patch**](https://github.com/xp-forge/json-patch) (v2.1.0)
-5. [**gamringer/php-json-patch**](https://github.com/gamringer/JSONPatch) (v1.0)
-6. [**swaggest/json-diff**](https://github.com/swaggest/json-diff) (v.3.11)
-7. [**remorhaz/php-json-patch**](https://github.com/remorhaz/php-json-patch) (v.0.6.1)
+1. [**blancks/fast-jsonpatch-php**](https://github.com/blancks/fast-jsonpatch-php)
+2. [**mikemccabe/json-patch-php**](https://github.com/mikemccabe/json-patch-php)
+3. [**php-jsonpatch/php-jsonpatch**](https://github.com/raphaelstolt/php-jsonpatch)
+4. [**xp-forge/json-patch**](https://github.com/xp-forge/json-patch)
+5. [**gamringer/php-json-patch**](https://github.com/gamringer/JSONPatch)
+6. [**swaggest/json-diff**](https://github.com/swaggest/json-diff)
+7. [**remorhaz/php-json-patch**](https://github.com/remorhaz/php-json-patch)
 
 
 ## Benchmark Methodology
@@ -42,15 +42,15 @@ The benchmarks were executed on the following system:
 
 The compliance test strictly checks if the output json of each library is consistent with the RFC and if the library performs atomic operations.
 
-| Library                     | Tests                                                         |
-|-----------------------------|---------------------------------------------------------------|
-| blancks/fast-jsonpatch-php  | ![#008000](https://placehold.co/15x15/008000/008000.png) PASS |
-| remorhaz/php-json-patch     | ![#008000](https://placehold.co/15x15/008000/008000.png) PASS |
-| mikemccabe/json-patch-php   | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
-| php-jsonpatch/php-jsonpatch | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
-| xp-forge/json-patch         | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
-| gamringer/php-json-patch    | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
-| swaggest/json-diff          | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
+| Library / Status                                                                                                                                             | Version    |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| <div align="right">![blancks/fast-jsonpatch-php](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/blancks/fast-jsonpatch-php/badge.svg)</div>   | v1.2.3     |
+| <div align="right">![remorhaz/php-json-patch](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/remorhaz/php-json-patch/badge.svg)</div>         | v0.6.1     |
+| <div align="right">![mikemccabe/json-patch-php](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/mikemccabe/json-patch-php/badge.svg)</div>     | dev-master |
+| <div align="right">![php-jsonpatch/php-jsonpatch](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/php-jsonpatch/php-jsonpatch/badge.svg)</div> | v4.1.0     |
+| <div align="right">![xp-forge/json-patch](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/xp-forge/json-patch/badge.svg)</div>                 | v2.1.0     |
+| <div align="right">![gamringer/php-json-patch](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/gamringer/php-json-patch/badge.svg)</div>       | v1.0       |
+| <div align="right">![swaggest/json-diff](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/swaggest/json-diff/badge.svg)</div>                   | v3.11.0    |
 
 > mikemccabe and xp-forge libraries implicitly converts objects into arrays and while this make the compliace test fail it is still fine if you only have to consume the document in PHP. The other ones that failed the compliance test are not reliable for a real-world use
 

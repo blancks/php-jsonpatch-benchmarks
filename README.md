@@ -33,31 +33,32 @@ The following PHP JSON Patch libraries are included in the benchmark:
 The benchmarks were executed on the following system:
 
 - **PHP Version:** 8.2.2-nts
-- **Operating System:** Windows 10 Porfessional
+- **Operating System:** Windows 10 Professional
 - **Memory:** 32GB RAM (4 x 8 GB) 3600 MT/s C18
 - **Processor:** Ryzen 7 3700x
 
 
 ## RFC 6902 Compliance Test Results
 
-The compliance test strictly checks if the output json of each library is consistent with the RFC and if the library performs atomic operations. \
-Many libraries implicitly converts objects into arrays and while this make the compliace test fail it is still fine if you just have to consume the document in PHP.
+The compliance test strictly checks if the output json of each library is consistent with the RFC and if the library performs atomic operations.
 
 | Library                     | Tests                                                         |
 |-----------------------------|---------------------------------------------------------------|
 | blancks/fast-jsonpatch-php  | ![#008000](https://placehold.co/15x15/008000/008000.png) PASS |
+| remorhaz/php-json-patch     | ![#008000](https://placehold.co/15x15/008000/008000.png) PASS |
 | mikemccabe/json-patch-php   | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
 | php-jsonpatch/php-jsonpatch | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
 | xp-forge/json-patch         | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
 | gamringer/php-json-patch    | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
 | swaggest/json-diff          | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
-| remorhaz/php-json-patch     | ![#008000](https://placehold.co/15x15/008000/008000.png) PASS |
 
-> **Note:** Libraries that fails this test will be benchmarked as well if no error occurs
+> mikemccabe and xp-forge libraries implicitly converts objects into arrays and while this make the compliace test fail it is still fine if you only have to consume the document in PHP. The other ones that failed the compliance test are not reliable for a real-world use
+
+> Libraries that fails this test will be benchmarked as well if no error occurs
 
 ## Benchmark Results 
 
-The following table shows the average time each library took to apply a patch with 1000 operations to a target document as summary of the performance. \
+The following table shows the average time each library took to apply a patch with 1000 operations to a target document as summary of the performance. 
 The actual benchmark data is available [here](https://docs.google.com/spreadsheets/d/1ZTDWh1k-zzhYHqZB3JMD2WRV0bPRIWUMRbLiMJhMLHk/edit?usp=sharing).
 
 | Library                     | Microseconds                       |
@@ -70,8 +71,9 @@ The actual benchmark data is available [here](https://docs.google.com/spreadshee
 | php-jsonpatch/php-jsonpatch | 10970                              |
 | remorhaz/php-json-patch     | N/A (needs many hours to complete) |
 
-> **Note:** These results are indicative and may vary depending on the specific use case and system environment.
+> Unfortunately remorhaz skyrocket out of the chart just with 20 operations patch. It is in the range of O(2^n) if not worse.
 
+> These results are indicative and may vary depending on the specific use case and system environment.
 
 ## How to Run the Benchmarks
 

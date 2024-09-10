@@ -45,6 +45,13 @@ function runAutomatedTests(string $library): array
         ];
     }
 
+    if (($position = strpos($output, 'ERRORS!')) !== false) {
+        return [
+            'status' => false,
+            'output' => substr($output, $position)
+        ];
+    }
+
     return [
         'status' => false,
         'output' => 'Unknown Failure'

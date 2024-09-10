@@ -145,13 +145,15 @@ function spawnProcessFiber(string $library, int $patchsize, int $iterationstart,
  * @param float $startmicrotime microtime(true) of the time which the operation you want to see progress started
  * @param float $taskCurrentIteration your current task progress
  * @param float $taskMaxIterations the max value that $taskCurrentIteration must reach for the process to be completed
+ * @param float $factor allows to extimate non-linear timings
  * @return float
  */
-function extimatedTimeLeft(float $startmicrotime, float $taskCurrentIteration, float $taskMaxIterations): float
+function extimatedTimeLeft(float $startmicrotime, float $taskCurrentIteration, float $taskMaxIterations, float $factor = 1.0): float
 {
     return ceil(
         ((microtime(true) - $startmicrotime) / $taskCurrentIteration)
         * ($taskMaxIterations - $taskCurrentIteration)
+        * $factor
     );
 }
 

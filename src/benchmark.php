@@ -170,7 +170,7 @@ for ($patchsize = 1; $patchsize <= MAX_PATCHSIZE; ++$patchsize) {
 
         // lets the user know about the benchmark progress
         $progess = number_format($currentTestIteration / $maxTestIterations * 100, 2, '.', '');
-        $ETA = secondsToHumanTime(extimatedTimeLeft($start, $currentTestIteration, $maxTestIterations));
+        $ETA = secondsToHumanTime(extimatedTimeLeft($start, $currentTestIteration, $maxTestIterations, pow(1+((MAX_PATCHSIZE-$patchsize)/MAX_PATCHSIZE),2)));
         echo "\e[0G\e[2KTest in progress... [Patch Size: {$patchsize}] {$progess}% - ETA: {$ETA}";
 
     } while ($iterationCount < ITERATIONS_PER_PATCH);

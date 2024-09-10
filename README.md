@@ -9,7 +9,7 @@ This project aims to compare their performance and functionality.
 
 The following PHP JSON Patch libraries are included in the benchmark:
 
-1. [**blancks/fast-jsonpatch-php**](https://github.com/blancks/fast-jsonpatch-php) (v1.1.3)
+1. [**blancks/fast-jsonpatch-php**](https://github.com/blancks/fast-jsonpatch-php) (v1.2.3)
 2. [**mikemccabe/json-patch-php**](https://github.com/mikemccabe/json-patch-php) (dev-master)
 3. [**php-jsonpatch/php-jsonpatch**](https://github.com/raphaelstolt/php-jsonpatch) (v4.1.0)
 4. [**xp-forge/json-patch**](https://github.com/xp-forge/json-patch) (v2.1.0)
@@ -40,6 +40,9 @@ The benchmarks were executed on the following system:
 
 ## RFC 6902 Compliance Test Results
 
+The compliance test strictly checks if the output json of each library is consistent with the RFC and if the library performs atomic operations. \
+Many libraries implicitly converts objects into arrays and while this make the compliace test fail it is still fine if you just have to consume the document in PHP.
+
 | Library                     | Tests                                                         |
 |-----------------------------|---------------------------------------------------------------|
 | blancks/fast-jsonpatch-php  | ![#008000](https://placehold.co/15x15/008000/008000.png) PASS |
@@ -47,14 +50,25 @@ The benchmarks were executed on the following system:
 | php-jsonpatch/php-jsonpatch | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
 | xp-forge/json-patch         | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
 | gamringer/php-json-patch    | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
-| swaggest/json-diff          | ![#008000](https://placehold.co/15x15/008000/008000.png) PASS |
+| swaggest/json-diff          | ![#990000](https://placehold.co/15x15/990000/990000.png) FAIL |
 | remorhaz/php-json-patch     | ![#008000](https://placehold.co/15x15/008000/008000.png) PASS |
 
 > **Note:** Libraries that fails this test will be benchmarked as well if no error occurs
 
-## Benchmark Results
+## Benchmark Results 
 
-...
+The following table shows the average time each library took to apply a patch with 1000 operations to a target document as summary of the performance. \
+The actual benchmark data is available [here](https://docs.google.com/spreadsheets/d/1ZTDWh1k-zzhYHqZB3JMD2WRV0bPRIWUMRbLiMJhMLHk/edit?usp=sharing).
+
+| Library                     | Microseconds                       |
+|-----------------------------|------------------------------------|
+| blancks/fast-jsonpatch-php  | 2903                               |
+| mikemccabe/json-patch-php   | 3355                               |
+| swaggest/json-diff          | 3638                               |
+| gamringer/php-json-patch    | 7276                               |
+| xp-forge/json-patch         | 8534                               |
+| php-jsonpatch/php-jsonpatch | 10970                              |
+| remorhaz/php-json-patch     | N/A (needs many hours to complete) |
 
 > **Note:** These results are indicative and may vary depending on the specific use case and system environment.
 
@@ -87,6 +101,27 @@ for example:
 ```bash
 php jpbench blancks_fast-jsonpatch
 ```
+
+
+## Benchmark Configuration
+
+Benchmark configuration is located at `./src/config.php` \
+The following constants are available to customize the benchmark behavior:
+
+* `THREADS` the number of concurrent processes to spawn. \
+  _The benchmark is CPU intensive, do not put a value here higher than your processor logical cores_
+
+
+* `MAX_PATCHSIZE` the maximum number of operations for a single patch to benchmark
+
+
+* `ITERATIONS_PER_PATCH` how many times each patch size is benchmarked before moving to the next
+
+
+* `PATCH_NESTED_LEVEL` the number of tokens of the JSON pointer for each patch operation
+
+
+* `OUTPUT_FOLDER` folder where the benchmark results will be stored
 
 
 ## Contributing

@@ -28,7 +28,7 @@ const OUTPUT_FOLDER = 'results';
 /**
  * CLI instruction to run benchmark processes
  */
-const BENCHMARK_CMD = 'jpbench';
+const BENCHMARK_CMD = 'php jpbench';
 
 /**
  * CLI instruction to run automated tests

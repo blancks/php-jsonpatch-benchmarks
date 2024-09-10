@@ -99,7 +99,7 @@ function spawnProcessFiber(string $library, int $patchsize, int $iterationstart,
     $Fiber = new \Fiber(function(string $library, int $patchsize, int $iterationstart, int $iterationend): void
     {
         $cmd = sprintf(
-            'php %s %s %d %d %d',
+            '%s %s %d %d %d',
             BENCHMARK_CMD,
             $library,
             $patchsize,

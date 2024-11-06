@@ -59,6 +59,11 @@ abstract class JsonPatchCompliance extends TestCase
                 '[{"op": "remove", "path": "/0"}, {"op": "test", "path": "/a", "value": ""}]',
                 '["Hello"]',
             ],
+            'Atomic Operations, nested array: REMOVE' => [
+                '["Hello",["hello",["ciao"]]]',
+                '[{"op": "remove", "path": "/1/1"}, {"op": "test", "path": "/a", "value": ""}]',
+                '["Hello",["hello",["ciao"]]]',
+            ],
             'Atomic operations, mixed' => [
                 '{"foo":[{"bar":"start"}]}',
                 '[{"op": "add", "path": "/foo/-", "value": "Hello"},

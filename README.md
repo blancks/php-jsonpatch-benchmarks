@@ -44,7 +44,7 @@ The compliance test strictly checks if the output json of each library is consis
 
 | Library / Status                                                                                                                                             | Version    |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
-| <div align="right">![blancks/fast-jsonpatch-php](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/blancks/fast-jsonpatch-php/badge.svg)</div>   | v1.2.3     |
+| <div align="right">![blancks/fast-jsonpatch-php](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/blancks/fast-jsonpatch-php/badge.svg)</div>   | v2.0       |
 | <div align="right">![remorhaz/php-json-patch](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/remorhaz/php-json-patch/badge.svg)</div>         | v0.6.1     |
 | <div align="right">![mikemccabe/json-patch-php](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/mikemccabe/json-patch-php/badge.svg)</div>     | dev-master |
 | <div align="right">![php-jsonpatch/php-jsonpatch](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/php-jsonpatch/php-jsonpatch/badge.svg)</div> | v4.1.0     |
@@ -61,15 +61,18 @@ The compliance test strictly checks if the output json of each library is consis
 The following table shows the average time each library took to apply a patch with 1000 operations to a target document as summary of the performance. 
 The actual benchmark data is available [here](https://docs.google.com/spreadsheets/d/1ZTDWh1k-zzhYHqZB3JMD2WRV0bPRIWUMRbLiMJhMLHk/edit?usp=sharing).
 
-| Library                     | Microseconds |
+| Library (fully RFC compliant only) | Microseconds |
+|------------------------------------|--------------|
+| blancks/fast-jsonpatch-php         | 4511         |
+| remorhaz/php-json-patch            | 870711       |
+
+| Library (others)            | Microseconds |
 |-----------------------------|--------------|
-| blancks/fast-jsonpatch-php  | 2903         |
 | mikemccabe/json-patch-php   | 3355         |
 | swaggest/json-diff          | 3638         |
 | gamringer/php-json-patch    | 7276         |
 | xp-forge/json-patch         | 8534         |
 | php-jsonpatch/php-jsonpatch | 10970        |
-| remorhaz/php-json-patch     | 870711       |
 
 > These results are indicative and may vary depending on the specific use case and system environment.
 

@@ -4,11 +4,12 @@ namespace blancks\JsonPatchBenchmark\lib;
 
 function applyJsonPatch(string &$json, string $patch): float
 {
+    static $FastJsonPatch = null;
     $jsonDecoded = json_decode($json);
-    $patchDecoded = json_decode($patch);
+    $FastJsonPatch ??= new \blancks\JsonPatch\FastJsonPatch($jsonDecoded);
 
     $microtime = microtime(true);
-    \blancks\JsonPatch\FastJsonPatch::applyByReference($jsonDecoded, $patchDecoded);
+    $FastJsonPatch->apply($patch);
     $output = microtime(true) - $microtime;
 
     $json = json_encode($jsonDecoded);

@@ -29,32 +29,12 @@ function getAvailableLibraries(string $libFolder): array
 function runAutomatedTests(string $library): array
 {
     $cmd = sprintf(PHPUNIT_TEST_CMD, ucwords(str_replace('-', '_', $library)));
-    $output = shell_exec($cmd);
-
-    if (($position = strpos($output, 'OK ')) !== false) {
-        return [
-            'status' => true,
-            'output' => substr($output, $position)
-        ];
-    }
-
-    if (($position = strpos($output, 'FAILURES!')) !== false) {
-        return [
-            'status' => false,
-            'output' => substr($output, $position)
-        ];
-    }
-
-    if (($position = strpos($output, 'ERRORS!')) !== false) {
-        return [
-            'status' => false,
-            'output' => substr($output, $position)
-        ];
-    }
+    echo $cmd, PHP_EOL;
+    exec($cmd, $output, $exitcode);
 
     return [
-        'status' => false,
-        'output' => 'Unknown Failure'
+        'status' => $exitcode === 0,
+        'output' => end($output)
     ];
 }
 

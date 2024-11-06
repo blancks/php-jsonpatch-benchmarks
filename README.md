@@ -71,8 +71,6 @@ The actual benchmark data is available [here](https://docs.google.com/spreadshee
 | php-jsonpatch/php-jsonpatch | 10970        |
 | remorhaz/php-json-patch     | 870711       |
 
-> Unfortunately remorhaz skyrocket out of the chart just with 20 operations patch. It is in the range of O(2^n) if not worse.
-
 > These results are indicative and may vary depending on the specific use case and system environment.
 
 ## How to Run the Benchmarks

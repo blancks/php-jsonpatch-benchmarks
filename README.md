@@ -52,7 +52,7 @@ The compliance test strictly checks if the output json of each library is consis
 | <div align="right">![gamringer/php-json-patch](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/gamringer/php-json-patch/badge.svg)</div>       | v1.0       |
 | <div align="right">![swaggest/json-diff](https://github.com/blancks/php-jsonpatch-benchmarks/workflows/swaggest/json-diff/badge.svg)</div>                   | v3.11.0    |
 
-> mikemccabe and xp-forge libraries implicitly converts objects into arrays and while this make the compliace test fail it is still fine if you only have to consume the document in PHP. The other ones that failed the compliance test are not reliable for a real-world use
+> mikemccabe and xp-forge libraries implicitly converts objects into arrays and while this make the compliace test fail it is still fine if you only have to consume the document in PHP
 
 > Libraries that fails this test will be benchmarked as well if no error occurs
 
